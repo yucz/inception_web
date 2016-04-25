@@ -1,0 +1,109 @@
+{% extends "base.html" %}
+
+
+
+{% block title %}
+
+    发布管理
+
+{% endblock %}
+
+
+
+{% block content %}
+
+    <div class="btn-toolbar">
+
+        <div class="btn-group">
+
+            {% url "addmysqlfaburl" as theaddurl %}
+
+            <a class="btn btn-default {%if request.path = theaddurl%} active {%endif%}" href={{ theaddurl }}><span class="glyphicon glyphicon-edit"></span>新建发布</a>
+
+            {% url "listmysqlfaburl" as thelisturl %}
+
+            <a class="btn btn-default {%if request.path = thelisturl%} active {%endif%}" href={{ thelisturl }}><span class="glyphicon glyphicon-list"></span>发布管理</a>
+
+        </div>
+
+    </div>
+
+
+
+    <hr/>
+
+
+	<!-- ########列表：list######## -->
+
+	<table class="table table-hover table-striped  table-bordered table-condensed">
+
+        <tr>
+
+            <th>发布者</th>
+
+            <th>项目名称</th>
+
+            <th>主题</th>
+
+            <th>推送状态</th>
+
+            <th>创建时间</th>
+
+            <th>操作</th>
+
+        </tr>
+
+        {% for i in lPage %}
+
+        <tr style="font-size: 13px;">
+
+            <td>{{ i.test1 }}</td>
+
+            <td>{{ i.test2|default:"----" }}</td>
+
+            <td>
+
+                {% if i.is_test %}
+
+                    <span class="label label-success">启用</span>
+
+                {% else %}
+
+                    <span class="label label-default">禁用</span>
+
+                {% endif %}
+
+            </td>
+
+            <td>{{ i.last_login|date:"Y-m-d H:i:s" }}</td>
+
+            <td class="host_buttom">
+
+                <a class="btn btn-warning btn-xs"  href={% url "edituserurl" i.id %} onclick="return confirm('是否确认编辑？')">编辑</a>
+
+                <a class="btn btn-danger btn-xs" href={% url "deleteuserurl" i.id %} onclick="return confirm('是否确认删除？')">删除</a>
+
+            </td>
+
+        </tr>
+
+        {% endfor %}
+
+    </table>
+
+	{% include "common/paginator.html" %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% endblock %}
+

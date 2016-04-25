@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block title %}
+    Menu List
+{% endblock %}
+
+{% block content %}
+    <div class="btn-toolbar">
+        <div class="btn-group">
+            {% url "addmenuurl" as theaddmenuurl %}
+            <a class="btn btn-default {%if request.path = theaddmenuurl%} active {%endif%}" href={{ theaddmenuurl }}><span class="glyphicon glyphicon-edit"></span>新建菜单</a>
+            {% url "listmenuurl" as thelistmenuurl %}
+            <a class="btn btn-default {%if request.path = thelistmenuurl%} active {%endif%}" href={{ thelistmenuurl }}><span class="glyphicon glyphicon-list"></span>菜单列表</a>
+        </div>
+    </div>
+
+    <hr/>
+
+    <table class="table table-hover table-striped  table-bordered table-condensed">
+        <tr>
+            <th>菜单名称</th>
+            <th>操作</th>
+        </tr>
+
+        {% for i in lPage %}
+            <tr style="font-size: 13px;">
+                <td>{{ i.text }} </td>
+
+                <td>
+                    <a href={% url "editmenuurl" i.id %} onclick="return confirm('确认编辑菜单吗？？')"><span class="glyphicon glyphicon-edit btn-xs"></span></a>
+                    <a href={% url "deletemenuurl" i.id %} onclick="return confirm('确认删除菜单吗？？')"><span class="glyphicon glyphicon-trash btn-xs"></span></a>
+                </td>
+            </tr>
+        {% endfor %}
+
+    </table>
+
+    {% include "common/paginator.html" %}
+{% endblock %}

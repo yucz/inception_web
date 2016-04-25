@@ -1,0 +1,79 @@
+<!-- 系统管理 -->
+            <div class="panel-group" id="accordion" {% if cur_menu_parent = 'systems' or 'systems/' in request.path %} in {% else %} hidden {% endif %}>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" class="collapsed">
+                                <span class="glyphicon glyphicon-list-alt btn-xs"></span>系统管理
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapseTwo" class="panel-collapse collapse in">
+                        <div class="panel-body">
+                            <table class="table">
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <span class="glyphicon glyphicon-cog btn-xs"></span><a href={% url "listuserurl" %}>用户管理</a>
+                                            {% if 'user' in request.path %} <span class="glyphicon glyphicon-ok btn-xs red"></span> {% endif %}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <span class="glyphicon glyphicon-cog btn-xs"></span><a href={% url "listroleurl" %}>角色管理</a>
+                                            {% if 'role' in request.path %} <span class="glyphicon glyphicon-ok btn-xs"></span> {% endif %}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <span class="glyphicon glyphicon-cog btn-xs"></span><a href={% url "listpermissionurl" %}>权限管理</a>
+                                            {% if 'permission' in request.path %} <span class="glyphicon glyphicon-ok btn-xs"></span> {% endif %}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <span class="glyphicon glyphicon-cog btn-xs"></span><a href={% url "listmenuurl" %}>菜单管理</a>
+                                            {% if 'menu' in request.path %} <span class="glyphicon glyphicon-ok btn-xs"></span> {% endif %}
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+
+<!-- mysql发布 -->
+            <div class="panel-group" id="accordion" {% if cur_menu_parent = 'mysqlfab' or 'mysqlfab/' in request.path %} in {% else %} hidden {% endif %}>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" class="collapsed">
+                                <span class="glyphicon glyphicon-list-alt btn-xs"></span>mysql发布
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapseTwo" class="panel-collapse collapse in">
+                        <div class="panel-body">
+                            <li class="list-group-item">
+                                <span class="glyphicon glyphicon-globe btn-xs"></span><a href={% url "listmysqlfaburl" %}>发布任务</a>
+                            </li>
+                            <li class="list-group-item">
+                                <span class="glyphicon glyphicon-globe btn-xs"></span><a href={% url "listmysqlfaburl" %}>MySQL实例</a>
+					            <ul style="list-style:none;padding-left:35px;">
+						            <li><i class="glyphicon glyphicon-globe" style="font-size: 1px;margin-right:3px;padding-top:10px;"></i><a href="{% url 'listmysqlfaburl' %}">开发测试实例</a></li>
+						            <li><i class="glyphicon glyphicon-globe" style="font-size: 1px;margin-right:3px;padding-top:10px;"></i><a href="{% url 'listmysqlfaburl' %}">PL实例</a></li>
+						            <li><i class="glyphicon glyphicon-globe" style="font-size: 1px;margin-right:3px;padding-top:10px;"></i><a href="{% url 'listmysqlfaburl' %}">线上实例</a></li>
+					            </ul>
+                            </li>
+                            <li class="list-group-item">
+                                <span class="glyphicon glyphicon-tasks btn-xs"></span><a href="#" style="text-decoration:none;">Mysql项目管理</a>
+                            </li>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+

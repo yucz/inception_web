@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block title %}
+    Menu Edit
+{% endblock %}
+
+{% block head %}
+    <script src="/static/js/jquery.bootstrap-duallistbox.js"></script>
+    <link rel="stylesheet" type="text/css" href="/static/css/bootstrap-duallistbox.css">
+{% endblock %}
+
+{% block content %}
+    <div class="btn-toolbar">
+        <div class="btn-group">
+            {% url "addmenuurl" as theaddmenuurl %}
+            <a class="btn btn-default {%if request.path = theaddmenuurl%} active {%endif%}" href={{ theaddmenuurl }}><span class="glyphicon glyphicon-edit"></span>新建菜单</a>
+            {% url "listmenuurl" as thelistmenuurl %}
+            <a class="btn btn-default {%if request.path = thelistmenuurl%} active {%endif%}" href={{ thelistmenuurl }}><span class="glyphicon glyphicon-list"></span>菜单列表</a>
+        </div>
+    </div>
+
+    <hr/>
+
+    <form class="form-horizontal" role="form" action={% url "editmenuurl" ID %} method="POST" >
+    {% csrf_token %}
+
+        {% for item in form %}
+            <div class="form-group">
+                <label class="control-label col-md-1">{{item.label}}</label>
+                <div class="col-md-11">
+                    {{item}}
+                </div>
+                <div class="col-md-offset-1 col-md-10">
+                    {{item.errors}}
+                </div>
+            </div>
+        {% endfor %}
+
+        <div class="form-group">
+            <div class="col-md-offset-1 col-md-10">
+                <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('确认更新吗？')">更 新</button>
+            <div>
+        </div>
+
+    </form>
+
+
+{% endblock %}
